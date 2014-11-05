@@ -4,14 +4,16 @@ class PokemonController < ApplicationController
 	# rails could not find a "new" method even though I specified the route. I figured this controller would
 	# be able to inherit the new method frmo the application controller, but I might just have a routing error or something.
 	def create
-		@pokemon = Pokemon.new({:name => (params[:pokemon])[:name], 
-        	:trainer_id => current_trainer, :level => 1, :health => 100})
+		@pokemon = Pokemon.new({:name => (params[:pokemon])[:name]})
 		# @pokemon.name = :name
+		@pokemon.level = 1
+		@pokemon.health = 100
 		@pokemon.trainer = current_trainer
 	    if @pokemon.save
 			redirect_to trainer_path(current_trainer)
 		else
 			redirect_to pokemon_new_path
+
 			flash[:error] = @pokemon.errors.full_messages.to_sentence
 		end
 	end
