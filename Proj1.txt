@@ -1,0 +1,1 @@
+1. We have not defined Pokemon yet, so it's throwing an uninitialization error
